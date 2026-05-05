@@ -1,0 +1,12 @@
+# Mount YOLO26x **detect** base weights (COCO). Labels are not scratch/dent/crack until you fine-tune.
+# Place checkpoint at: model-training/pretrained/yolo26x.pt
+#
+#   docker compose -f docker-compose.yml -f docker-compose.yolo26x-base.example.yml up -d ai-service
+
+services:
+  ai-service:
+    environment:
+      INFERENCE_MODE: yolo
+      MODEL_PATH: /weights/yolo26x.pt
+    volumes:
+      - ./model-training/pretrained/yolo26x.pt:/weights/yolo26x.pt:ro

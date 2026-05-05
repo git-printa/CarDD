@@ -1,0 +1,445 @@
+{
+  "info": {
+    "name": "Car Damage AI - API",
+    "_postman_id": "c8f9aa71-fd90-4a84-98e1-4debe1a9c6c8",
+    "description": "Versioned Postman collection for this project. Update this file whenever endpoints/response contracts change.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "ai-service",
+      "item": [
+        {
+          "name": "GET /health",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status 200', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "});",
+                  "const body = pm.response.json();",
+                  "pm.test('has status ok', function () {",
+                  "  pm.expect(body.status).to.eql('ok');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "health"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /predict (valid image)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status 200', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "});",
+                  "const body = pm.response.json();",
+                  "pm.test('has expected keys', function () {",
+                  "  pm.expect(body).to.have.property('detections');",
+                  "  pm.expect(body).to.have.property('part_detections');",
+                  "  pm.expect(body).to.have.property('image_width');",
+                  "  pm.expect(body).to.have.property('image_height');",
+                  "  pm.expect(body).to.have.property('inference_mode');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "{{sampleImagePath}}"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/predict",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "predict"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /predict (non-image should fail)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status 400', function () {",
+                  "  pm.response.to.have.status(400);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "{{sampleTextPath}}"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/predict",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "predict"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "backend",
+      "item": [
+        {
+          "name": "GET /health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{backendBaseUrl}}/health",
+              "host": [
+                "{{backendBaseUrl}}"
+              ],
+              "path": [
+                "health"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /api/v1/assessments/upload",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "vehicleId",
+                  "value": "VH-123",
+                  "type": "text"
+                },
+                {
+                  "key": "files",
+                  "type": "file",
+                  "src": "{{sampleImagePath}}"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{backendBaseUrl}}/api/v1/assessments/upload",
+              "host": [
+                "{{backendBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "assessments",
+                "upload"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /api/v1/assessments/{batchId}/analyze",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status 200', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "});",
+                  "const body = pm.response.json();",
+                  "pm.test('has damages and total_cost', function () {",
+                  "  pm.expect(body).to.have.property('damages');",
+                  "  pm.expect(body).to.have.property('total_cost');",
+                  "  pm.expect(body).to.have.property('total_cost_nis');",
+                  "  pm.expect(body).to.have.property('currency');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{backendBaseUrl}}/api/v1/assessments/{{batchId}}/analyze",
+              "host": [
+                "{{backendBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "assessments",
+                "{{batchId}}",
+                "analyze"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /api/v1/analytics/summary",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status 200', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "});",
+                  "const body = pm.response.json();",
+                  "pm.test('has persisted analytics fields', function () {",
+                  "  pm.expect(body).to.have.property('batches');",
+                  "  pm.expect(body).to.have.property('images');",
+                  "  pm.expect(body).to.have.property('detections');",
+                  "  pm.expect(body).to.have.property('total_cost');",
+                  "  pm.expect(body).to.have.property('total_cost_nis');",
+                  "  pm.expect(body).to.have.property('currency');",
+                  "  pm.expect(body).to.have.property('top_damage_types');",
+                  "  pm.expect(body).to.have.property('cost_by_part');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{backendBaseUrl}}/api/v1/analytics/summary?days={{timeRangeDays}}",
+              "host": [
+                "{{backendBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "analytics",
+                "summary"
+              ],
+              "query": [
+                {
+                  "key": "days",
+                  "value": "{{timeRangeDays}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /api/v1/chat/skills",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status 200', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "});",
+                  "const body = pm.response.json();",
+                  "pm.test('returns skill list', function () {",
+                  "  pm.expect(body).to.be.an('array');",
+                  "  pm.expect(body.length).to.be.greaterThan(0);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{backendBaseUrl}}/api/v1/chat/skills",
+              "host": [
+                "{{backendBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "chat",
+                "skills"
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /api/v1/chat/runtime",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status 200', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "});",
+                  "const body = pm.response.json();",
+                  "pm.test('runtime fields exist', function () {",
+                  "  pm.expect(body).to.have.property('chat_mode');",
+                  "  pm.expect(body).to.have.property('ollama_url');",
+                  "  pm.expect(body).to.have.property('ollama_model');",
+                  "  pm.expect(body).to.have.property('ollama_available');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{backendBaseUrl}}/api/v1/chat/runtime",
+              "host": [
+                "{{backendBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "chat",
+                "runtime"
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /api/v1/chat/query",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('status 200', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "});",
+                  "const body = pm.response.json();",
+                  "pm.test('has explainable response shape', function () {",
+                  "  pm.expect(body).to.have.property('answer');",
+                  "  pm.expect(body).to.have.property('query_type');",
+                  "  pm.expect(body).to.have.property('skill_used');",
+                  "  pm.expect(body).to.have.property('time_range_days');",
+                  "  pm.expect(body).to.have.property('sources');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Role",
+                "value": "{{chatRole}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prompt\": \"{{chatPrompt}}\",\n  \"time_range_days\": {{timeRangeDays}}\n}"
+            },
+            "url": {
+              "raw": "{{backendBaseUrl}}/api/v1/chat/query",
+              "host": [
+                "{{backendBaseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "chat",
+                "query"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000"
+    },
+    {
+      "key": "sampleImagePath",
+      "value": "/absolute/path/to/car.jpg"
+    },
+    {
+      "key": "sampleTextPath",
+      "value": "/absolute/path/to/test.txt"
+    },
+    {
+      "key": "backendBaseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "batchId",
+      "value": "replace-after-upload"
+    },
+    {
+      "key": "frontendBaseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "timeRangeDays",
+      "value": "30"
+    },
+    {
+      "key": "chatRole",
+      "value": "analyst"
+    },
+    {
+      "key": "chatPrompt",
+      "value": "compare last 7 days vs previous"
+    }
+  ]
+}

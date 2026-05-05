@@ -1,0 +1,549 @@
+.page {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(91, 140, 255, 0.16), transparent 35%),
+    radial-gradient(circle at 85% 20%, rgba(55, 214, 122, 0.12), transparent 35%),
+    #0c1018;
+}
+
+.cpLayout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: 100vh;
+}
+
+.cpSidebar {
+  border-right: 1px solid var(--border);
+  background: #0c111b;
+  padding: 18px 14px;
+}
+
+.cpLogo {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.cpMenu {
+  display: grid;
+  gap: 8px;
+}
+
+.cpNavBtn {
+  text-align: left;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #121826;
+  color: var(--text);
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+.cpNavBtn.active {
+  border-color: color-mix(in srgb, var(--accent) 70%, var(--border));
+  background: color-mix(in srgb, var(--accent) 18%, #121826);
+}
+
+.cpNavTitle {
+  font-weight: 650;
+}
+
+.cpNavSub {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.cpMain {
+  padding: 24px 20px 28px;
+  max-width: 1280px;
+}
+
+.topbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.brand {
+  font-size: 22px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.tagline {
+  color: var(--muted);
+  margin-top: 6px;
+  font-size: 14px;
+}
+
+.topbarRight {
+  min-width: 28px;
+  min-height: 28px;
+  display: flex;
+  align-items: center;
+}
+
+.grid {
+  display: grid;
+  gap: 14px;
+}
+
+.trainingGrid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 12px;
+}
+
+.taxonomyNote {
+  border: 1px solid var(--border);
+  border-left: 4px solid #5b8cff;
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.trainingList {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.trainingItems {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+  max-height: 380px;
+  overflow: auto;
+}
+
+.trainingItem {
+  text-align: left;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.trainingItem.active {
+  border-color: #5b8cff;
+}
+
+.trainingImage {
+  width: 100%;
+  max-height: 360px;
+  object-fit: contain;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.annotatorSurface {
+  position: relative;
+  user-select: none;
+}
+
+.labelRect {
+  position: absolute;
+  border: 2px solid #37d67a;
+  background: color-mix(in srgb, #37d67a 18%, transparent);
+  border-radius: 4px;
+  padding: 0;
+  text-align: left;
+  color: #fff;
+  font-size: 11px;
+  overflow: hidden;
+}
+
+.labelRect span {
+  background: rgba(0, 0, 0, 0.55);
+  display: inline-block;
+  padding: 2px 4px;
+}
+
+.labelRect.active {
+  border-color: #ffb020;
+}
+
+.labelRect.draft {
+  border-style: dashed;
+  pointer-events: none;
+  background: color-mix(in srgb, #5b8cff 16%, transparent);
+}
+
+.trainingFormRow {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+  align-items: end;
+  margin-bottom: 10px;
+}
+
+.trainingActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.trainingFormRowWide {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.activeRow {
+  background: color-mix(in srgb, #5b8cff 16%, transparent);
+}
+
+.okMsg {
+  margin-top: 10px;
+  color: #4ab86f;
+}
+
+.errMsg {
+  margin-top: 10px;
+  color: #e76c6c;
+}
+
+.trainingStatus {
+  margin-top: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 13px;
+}
+
+.trainingLog {
+  margin: 8px 0 0;
+  background: #0b1018;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px;
+  max-height: 220px;
+  overflow: auto;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.inferenceBanner {
+  border: 1px solid var(--border);
+  border-left: 4px solid #5b8cff;
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  background: color-mix(in srgb, var(--panel) 92%, #5b8cff);
+  font-size: 13px;
+}
+
+.inferenceBannerTitle {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.inferenceBannerNote {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.card {
+  background: color-mix(in srgb, var(--panel) 92%, transparent);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  backdrop-filter: blur(10px);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.cardTitle {
+  font-weight: 650;
+}
+
+.cardSub {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.pill {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+label {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+input[type="text"],
+input[type="number"],
+select,
+input[type="file"] {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #0f131b;
+  color: var(--text);
+  padding: 10px 12px;
+}
+
+.chatControls {
+  display: grid;
+  grid-template-columns: 220px 220px;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.chatList {
+  display: grid;
+  gap: 10px;
+  max-height: 360px;
+  overflow: auto;
+  padding: 4px 2px 4px 0;
+}
+
+.chatBubble {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px;
+  max-width: 92%;
+}
+
+.chatBubble.user {
+  justify-self: end;
+  background: color-mix(in srgb, var(--accent) 20%, #121722);
+}
+
+.chatBubble.assistant {
+  justify-self: start;
+  background: #121722;
+}
+
+.chatMeta {
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.chatComposer {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.chatRuntime {
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+.okMsgInline {
+  color: #4ab86f;
+}
+
+.errMsgInline {
+  color: #e76c6c;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn {
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  background: #121722;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.btn.primary {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 35%, #121722), #121722);
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.tableWrap {
+  overflow: auto;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.table th,
+.table td {
+  padding: 10px 10px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.table th {
+  text-align: left;
+  color: var(--muted);
+  font-weight: 600;
+  background: #121722;
+  position: sticky;
+  top: 0;
+}
+
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 12px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 12px;
+}
+
+.tab {
+  border: 1px solid var(--border);
+  background: #121722;
+  color: var(--text);
+  border-radius: 999px;
+  padding: 8px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.tab.active {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+}
+
+.previewStage {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #0f131b;
+}
+
+.previewImg {
+  display: block;
+  max-width: min(920px, 100%);
+  max-height: 520px;
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+}
+
+.previewSvg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+}
+
+.bbox {
+  fill: rgba(91, 140, 255, 0.12);
+  stroke: rgba(91, 140, 255, 0.95);
+  stroke-width: 2;
+}
+
+.bboxLabel {
+  fill: rgba(232, 236, 243, 0.95);
+  font-size: 14px;
+  paint-order: stroke fill;
+  stroke: rgba(15, 17, 21, 0.85);
+  stroke-width: 3px;
+}
+
+.spinner {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  border: 2px solid color-mix(in srgb, var(--muted) 35%, transparent);
+  border-top-color: var(--accent);
+  display: inline-block;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error {
+  border-color: color-mix(in srgb, var(--danger) 45%, var(--border));
+}
+
+.errBody {
+  margin: 0;
+  white-space: pre-wrap;
+  color: color-mix(in srgb, var(--danger) 85%, var(--text));
+  font-size: 12px;
+}
+
+.footer {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.kpiCard {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+  background: color-mix(in srgb, var(--panel) 88%, transparent);
+}
+
+.kpiLabel {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.kpiValue {
+  font-size: 28px;
+  font-weight: 700;
+  margin-top: 6px;
+}

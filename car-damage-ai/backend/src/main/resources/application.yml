@@ -1,0 +1,29 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:h2:file:/tmp/car-damage-ai/cardamage;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE}
+    username: ${DB_USER:sa}
+    password: ${DB_PASS:}
+    driver-class-name: ${DB_DRIVER:org.h2.Driver}
+  flyway:
+    enabled: ${FLYWAY_ENABLED:true}
+    locations: classpath:db/migration
+  servlet:
+    multipart:
+      max-file-size: 15MB
+      max-request-size: 60MB
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+app:
+  upload-dir: ${UPLOAD_DIR:/tmp/car-damage-ai/uploads}
+  ai-service-url: ${AI_SERVICE_URL:http://ai-service:8000}
+  chat-mode: ${CHAT_MODE:assistant_full}
+  ollama-url: ${OLLAMA_URL:http://host.docker.internal:11434}
+  ollama-model: ${OLLAMA_MODEL:llama3.1}

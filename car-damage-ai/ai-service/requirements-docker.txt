@@ -1,0 +1,18 @@
+# Installed in Docker after CPU torch/torchvision.
+# ultralytics is installed with --no-deps so pip does not pull CUDA torch.
+fastapi==0.115.6
+uvicorn[standard]==0.32.1
+python-dotenv==1.0.1
+python-multipart==0.0.17
+pillow>=10.3.0,<12
+matplotlib>=3.3.0
+opencv-python-headless>=4.8.0
+pyyaml>=5.3.1
+requests>=2.23.0
+scipy>=1.4.1
+tqdm>=4.64.0
+psutil>=5.9.0
+py-cpuinfo>=9.0.0
+pandas>=1.1.4
+seaborn>=0.11.0
+ultralytics-thop>=2.0.18
